@@ -16,7 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.attribute.PosixFilePermission;
 
 import static com.github.nocatch.NoCatch.noCatch;
-import static org.bridj.Platform.show;
+import static com.sun.jna.Platform.show;
 
 public class PlatformService {
   private final HostServices hostServices;
