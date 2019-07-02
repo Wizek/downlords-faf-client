@@ -154,7 +154,7 @@ public class ChatControllerTest extends AbstractPlainJavaFxTest {
       MapChangeListener.Change<? extends String, ? extends Channel> change = mock(MapChangeListener.Change.class);
       when(change.wasAdded()).thenReturn(true);
       // Error here is caused by a bug in IntelliJ
-      when(change.getValueAdded()).thenReturn(new Channel(invocation.getArgument(0)));
+      when((Channel)change.getValueAdded()).thenReturn(new Channel(invocation.getArgument(0)));
       channelsListener.getValue().onChanged(change);
       return null;
     }).when(chatService).joinChannel(anyString());
@@ -168,7 +168,7 @@ public class ChatControllerTest extends AbstractPlainJavaFxTest {
     MapChangeListener.Change<? extends String, ? extends ChatChannelUser> change = mock(MapChangeListener.Change.class);
     when(change.wasAdded()).thenReturn(true);
     // Error here is caused by a bug in IntelliJ
-    when(change.getValueAdded()).thenReturn(new ChatChannelUser(TEST_USER_NAME, null, false));
+    when((ChatChannelUser)change.getValueAdded()).thenReturn(new ChatChannelUser(TEST_USER_NAME, null, false));
     onUsersListenerCaptor.getValue().onChanged(change);
 
     CountDownLatch tabAddedLatch = new CountDownLatch(1);
