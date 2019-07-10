@@ -1,6 +1,6 @@
 package com.faforever.client.ui.statusbar;
 
-import com.faforever.client.chat.ChatService;
+import com.faforever.client.chat.OldChatService;
 import com.faforever.client.fx.Controller;
 import com.faforever.client.fx.JavaFxUtil;
 import com.faforever.client.i18n.I18n;
@@ -34,7 +34,7 @@ public class StatusBarController implements Controller<Node> {
 
   private final FafService fafService;
   private final I18n i18n;
-  private final ChatService chatService;
+  private final OldChatService chatService;
   private final TaskService taskService;
 
   public Label chatConnectionStatusIcon;
@@ -47,7 +47,7 @@ public class StatusBarController implements Controller<Node> {
   public Label versionLabel;
 
   @Inject
-  public StatusBarController(FafService fafService, I18n i18n, ChatService chatService, TaskService taskService) {
+  public StatusBarController(FafService fafService, I18n i18n, OldChatService chatService, TaskService taskService) {
     this.fafService = fafService;
     this.i18n = i18n;
     this.chatService = chatService;

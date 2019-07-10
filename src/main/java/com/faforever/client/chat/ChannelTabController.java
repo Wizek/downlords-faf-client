@@ -145,7 +145,7 @@ public class ChannelTabController extends AbstractChatTabController {
   private SetChangeListener<String> moderatorsChangedListener;
 
   // TODO cut dependencies
-  public ChannelTabController(UserService userService, ChatService chatService,
+  public ChannelTabController(UserService userService, OldChatService chatService,
                               PreferencesService preferencesService,
                               PlayerService playerService, AudioService audioService, TimeService timeService,
                               I18n i18n, ImageUploadService imageUploadService,
@@ -511,6 +511,8 @@ public class ChannelTabController extends AbstractChatTabController {
       updateChatUserListItemsForCategories(chatUser);
     };
     socialStatusMessagesListeners.computeIfAbsent(player.getUsername(), i -> new ArrayList<>()).add(listener);
+    // TODO the line above throws ConcurrentModificationException for java.base/java.util.HashMap.computeIfAbsent(HashMap.java:1139)
+    // if no part of the client has ever registered a listener for SocialMessage.class via FafService
     return new WeakChangeListener<>(listener);
   }
 
@@ -531,6 +533,7 @@ public class ChannelTabController extends AbstractChatTabController {
       List<CategoryOrChatUserListItem> items = userNamesToListItems.get(username);
       List<CategoryOrChatUserListItem> listItemsToBeRemoved = userNamesToListItems.remove(username);
       chatUserListItems.removeAll(items);
+      // TODO NullPointerException in line above
 
       hideFoeMessagesListeners.remove(username);
       socialStatusMessagesListeners.remove(username);

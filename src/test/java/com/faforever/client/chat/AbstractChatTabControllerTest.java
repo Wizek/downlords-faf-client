@@ -64,7 +64,7 @@ public class AbstractChatTabControllerTest extends AbstractPlainJavaFxTest {
   @Rule
   public TemporaryFolder tempDir = new TemporaryFolder();
   @Mock
-  private ChatService chatService;
+  private OldChatService chatService;
   @Mock
   private UserService userService;
   @Mock
