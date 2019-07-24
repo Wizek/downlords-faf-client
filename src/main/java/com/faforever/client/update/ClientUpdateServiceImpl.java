@@ -59,7 +59,7 @@ public class ClientUpdateServiceImpl implements ClientUpdateService {
     this.applicationContext = applicationContext;
 
     currentVersion = new ComparableVersion(
-        defaultString(Version.VERSION, DEVELOPMENT_VERSION_STRING)
+        defaultString(Version.getCurrentVersion(), DEVELOPMENT_VERSION_STRING)
     );
     logger.info("Current version: {}", currentVersion);
   }
@@ -69,7 +69,6 @@ public class ClientUpdateServiceImpl implements ClientUpdateService {
    */
   public void checkForUpdateInBackground() {
     CheckForUpdateTask task = applicationContext.getBean(CheckForUpdateTask.class);
-    task.setCurrentVersion(currentVersion);
 
     taskService.submitTask(task).getFuture().thenAccept(updateInfo -> {
       if (updateInfo == null) {
